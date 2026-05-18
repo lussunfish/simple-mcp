@@ -1,0 +1,13 @@
+⏺ Update(~/.gemini/settings.json)
+  ⎿  Added 5 lines
+       3      "auth": {
+       4        "selectedType": "oauth-personal"
+       5      }
+       6 +  },
+       7 +  "mcpServers": {
+       8 +    "simple-mcp": {
+       9 +      "url": "http://localhost:8080/sse"
+      10 +    }
+      11    }
+      12  }
+      13   No newline at end of file
