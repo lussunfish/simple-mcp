@@ -1,0 +1,26 @@
+services:
+  mariadb:
+    image: mariadb:11
+    env_file: .env
+    volumes:
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+      - mariadb_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+
+  mcp-server:
+    build: ./mcp-server
+    ports:
+      - "8080:8080"
+    env_file: .env
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    restart: on-failure
+
+volumes:
+  mariadb_data:
